@@ -1,11 +1,32 @@
-import React from 'react'
-import { AppContainer } from './components/AppContainer'
-import {Header} from './components/Header'
-import {Filtro} from './components/Filtro'
-function App() {
-	return (
-		
-	)
+import React, { Component } from "react";
+import "./App.css";
+import CadProduto from "./components/CadProduto";
+
+
+class App extends React.Component {
+
+  render() {
+    return (
+      <div className="App">
+     
+
+<CadProduto />
+
+	
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    );
+  }
 }
 
-export default App
+export default App;
