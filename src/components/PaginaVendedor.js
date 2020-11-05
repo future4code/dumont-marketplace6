@@ -1,18 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Header} from './Header'
-import {Filtro} from './Filtro'
-import {CardProduto} from './CardProduto'
+import AdicionarProduto from './AdicionarProduto'
 
 
 
-export class PaginaConsumidor extends React.Component{
+
+export class PaginaVendedor extends React.Component{
     render(){
         return(
             <div>
                 <Header />
-                <Filtro />
-                <CardProduto/>
+                <AdicionarProduto />
             </div>
         )
     }

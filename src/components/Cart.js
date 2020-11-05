@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { CardProdutoCarrinho } from './CardProdutoCarrinho'
+
 
 const MainContainer = styled.div`
     display: flex;
@@ -54,7 +56,9 @@ class Cart extends React.Component {
                 <CartContainer>
                     <h1>Carrinho (3)</h1>
                     <StyledHr/>
-                    <p>lista de produtos do carrinho</p>
+                        <CardProdutoCarrinho/>
+                        <CardProdutoCarrinho/>
+                        <CardProdutoCarrinho/>
                     <StyledHr/>
                     <StyledP><b>Total: R$ 200</b></StyledP>
                 </CartContainer>
