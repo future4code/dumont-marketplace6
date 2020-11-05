@@ -104,22 +104,24 @@ const ButtonCompra = styled.button`
     }`
 
 export class CardProduto extends React.Component{
+    
     render(){
-        return(
-            <ContainerCard>
-                <ImgProduto src="https://picsum.photos/id/0/163/240/"/>
+        const renderProdutos = this.props.produtos.map((produto)=> {
+            return(
+                <ContainerCard>
+                <ImgProduto src={produto.photos}/>
                 <div>
-                    <h3>Nome do Produto</h3>
-                    <p>Informática</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br/> elit, sed do eiusmod tempor </p>
+                    <h3>{produto.name}</h3>
+                    <p>{produto.category}</p>
+                    <p>{produto.description}</p>
                 </div>
                 <PagPay>
                     <Preco>
-                        <h2>$30</h2>
+                        <h2>R${produto.price}</h2>
                         <img src={Estrela}/>
                     </Preco>                     
                     <ContainerBotao>
-                    <h6>12 vezes sem juros</h6>
+                    <h6>{produto.installments} vezes sem juros</h6>
                         <ButtonCompra>Adicionar no carrinho</ButtonCompra>
                     </ContainerBotao>
                     
@@ -128,7 +130,13 @@ export class CardProduto extends React.Component{
                                 
                             
                 
-            </ContainerCard>
-        )
+            </ContainerCard>  
+        )})
+            return(
+                <div>
+                    {renderProdutos}
+                </div>
+            )
+        }
+       
     }
-}
