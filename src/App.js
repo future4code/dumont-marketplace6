@@ -1,9 +1,14 @@
 import React from 'react'
 import { AppContainer } from './components/AppContainer'
+import { CardProduto } from './components/CardProduto/CardProduto'
 
 function App() {
 	return (
-        <AppContainer />
+		<div>
+       		 <AppContainer />
+			
+		</div>
+		
 	)
 }
 
