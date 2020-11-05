@@ -51,7 +51,10 @@ const Input = styled.input`
 
 const Search = styled.img`
     height:3vh;
-    padding-right:1vw;`
+    padding-right:1vw;
+    :hover{
+        cursor:pointer;
+    }`
 
 const ContainerCategorias = styled.div`
     display:flex;
