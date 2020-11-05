@@ -47,7 +47,7 @@ const StyledButton = styled.button`
     }
 `
 
-class Carrinho extends React.Component {
+class Cart extends React.Component {
     render() {
         return (
             <MainContainer>
@@ -64,4 +64,4 @@ class Carrinho extends React.Component {
     }
 }
 
-export default Carrinho;
+export default Cart;
