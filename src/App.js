@@ -5,11 +5,12 @@ import {Filtro} from './components/Filtro'
 import {CardProdutoCarrinho} from './components/CardProdutoCarrinho'
 import {Home} from './components/Home'
 import {AgradecimentoCompra} from './components/AgradecimentoCompra'
+import {PaginaConsumidor} from './components/PaginaConsumidor'
 class App extends React.Component{
 	render(){
 		return (
 			
-		<AgradecimentoCompra/>
+		<PaginaConsumidor/>
 		)
 	}
 }
