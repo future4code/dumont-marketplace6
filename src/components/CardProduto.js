@@ -31,11 +31,13 @@ const ContainerCard = styled.section` // Container principal do card
             }
         }        
 `
+
 const PagPay = styled.div`
     display: flex;
     flex-direction: column;    
    
 `
+
 const Preco = styled.div`
     display: flex;
     flex-direction: row;
@@ -60,6 +62,7 @@ const Preco = styled.div`
         display: inline;
     }
 `
+
 const ContainerBotao = styled.div`
     display: flex;
     flex-direction: column;
@@ -67,7 +70,6 @@ const ContainerBotao = styled.div`
     margin-top: 40px;
 
 `
-
 
 const ImgProduto = styled.img` // Imagem do produto
     height: 240px;

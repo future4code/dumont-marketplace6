@@ -56,11 +56,12 @@ class Cart extends React.Component {
                 <CartContainer>
                     <h1>Carrinho (3)</h1>
                     <StyledHr/>
-                        <CardProdutoCarrinho/>
-                        <CardProdutoCarrinho/>
-                        <CardProdutoCarrinho/>
+                        <CardProdutoCarrinho 
+                        carrinho={this.props.carrinho}
+                        aumentarQuantidadeProduto={this.props.aumentarQuantidadeProduto}
+                        diminuirQuantidadeProduto={this.props.diminuirQuantidadeProduto}/>
                     <StyledHr/>
-                    <StyledP><b>Total: R$ 200</b></StyledP>
+                    <StyledP><b>Total: R$ {this.props.valorCarrinho}</b></StyledP>
                 </CartContainer>
                 <StyledButton onClick={this.props.onClickEfetuaCompra}>Continuar compra</StyledButton>
             </MainContainer>

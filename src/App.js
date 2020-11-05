@@ -15,7 +15,8 @@ class App extends React.Component{
 		pCarrinho:false,
 		pAgradecimento:false,
         produtos:[],
-        carrinho:[]
+		carrinho:[],
+		valorCarrinho:0,
 	}
 	
 	componentDidMount = () => {
@@ -25,20 +26,55 @@ class App extends React.Component{
     pegarProdutos = () => {
         axios.get("https://us-central1-labenu-apis.cloudfunctions.net/fourUsedOne/products")
         .then((resposta)=>{
-            this.setState({produtos:resposta.data.products})
+			this.setState({produtos:resposta.data.products})
+			let novosProdutos = [...this.state.produtos]
+			novosProdutos.map((produto)=>{
+				produto.quantidade = 0
+			})
+			this.setState({produtos:novosProdutos})
             console.log(resposta)
             console.log(this.state.produtos)
         }).catch((err) => {
             console.log(err)
         })
 	}
-
+	aumentarQuantidadeProduto = (produto) =>{
+		let novoCarrinho = [... this.state.carrinho]
+		novoCarrinho.map((produtoCarrinho)=>{
+			if(produto.id === produtoCarrinho.id){
+				produto.quantidade += 1
+				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho})
+			}
+		})
+		
+	}
+	
+	diminuirQuantidadeProduto = (produto) => {
+		let novoCarrinho = [... this.state.carrinho]
+		novoCarrinho.map((produtoCarrinho)=>{
+			if(produto.id === produtoCarrinho.id){
+				produto.quantidade -=1
+				this.setState({valorCarrinho:this.state.valorCarrinho - produto.price})
+			}})
+	}
     adicionaProdutoCarrinho = (produto) => {
-        let novoCarrinho = [... this.state.carrinho]
-        novoCarrinho.push(produto)
-        this.setState({carrinho:novoCarrinho})
-        console.log(this.state.carrinho)
-    }
+		let novoCarrinho = [... this.state.produtos]
+		novoCarrinho.map((produtoCarrinho)=>{
+			if(produto.id === produtoCarrinho.id){
+				produto.quantidade +=1
+				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho})
+			}})
+		let carrinhoFiltrado = novoCarrinho.filter(function(item){
+			return item.quantidade > 0
+		})
+				
+		this.setState({carrinho:carrinhoFiltrado})
+		console.log(this.state.carrinho)
+		alert('Produto adicionado!')
+			
+		}
+        
+    
 	
 	onClickGoPaginaConsumidor = () => {
 		this.setState({pConsumidor:true, home:false, pAgradecimento:false})
@@ -83,7 +119,12 @@ class App extends React.Component{
 				return(
 					<PaginaCarrinho 
 					onClickEfetuaCompra={this.onClickEfetuaCompra}
-					onClickGoHome={this.onClickGoHome}/>
+					onClickGoHome={this.onClickGoHome}
+					carrinho={this.state.carrinho}
+					valorCarrinho={this.state.valorCarrinho}
+					aumentarQuantidadeProduto={this.aumentarQuantidadeProduto}
+					diminuirQuantidadeProduto={this.diminuirQuantidadeProduto}
+					/>
 				)
 			} else if(this.state.pAgradecimento === true){
 				return(

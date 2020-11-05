@@ -11,7 +11,12 @@ export class PaginaCarrinho extends React.Component{
         return(
             <div>
                 <Header onClickGoHome={this.props.onClickGoHome}/>
-                <Cart onClickEfetuaCompra={this.props.onClickEfetuaCompra}/>
+                <Cart 
+                onClickEfetuaCompra={this.props.onClickEfetuaCompra}
+                carrinho={this.props.carrinho}
+                valorCarrinho={this.props.valorCarrinho}
+                aumentarQuantidadeProduto={this.props.aumentarQuantidadeProduto}
+                diminuirQuantidadeProduto={this.props.diminuirQuantidadeProduto}/>
             </div>
         )
     }
