@@ -49,8 +49,8 @@ export class Home extends React.Component{
             <ContainerHome>
                 <FullLogo src={fullLogo}/>
                 <ContainerBotoes>
-                    <Botao>QUERO COMPRAR</Botao>
-                    <Botao>QUERO VENDER</Botao>
+                    <Botao onClick={this.props.onClickGoPaginaConsumidor}>QUERO COMPRAR</Botao>
+                    <Botao onClick={this.props.onClickGoPaginaVendedor}>QUERO VENDER</Botao>
                 </ContainerBotoes>
             </ContainerHome>
         )

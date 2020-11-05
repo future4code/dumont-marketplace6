@@ -9,6 +9,7 @@ const ContainerCard = styled.section` // Container principal do card
     display: flex;
     margin-left: auto;
     margin-right: 32px;  
+    margin-top:5vh;
 
         div{
             

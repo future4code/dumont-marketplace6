@@ -11,7 +11,10 @@ const ContainerCard = styled.div`
     display:flex;
     align-items:center;
     border:1px solid black;
-    width:50%;`
+    width:50%;
+    background-color:white;
+    margin:auto;
+    margin-bottom:1vh;`
 
 const ImagemProduto = styled.img`
     height:20vh;

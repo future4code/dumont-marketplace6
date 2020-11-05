@@ -10,7 +10,7 @@ export class PaginaVendedor extends React.Component{
     render(){
         return(
             <div>
-                <Header />
+                <Header onClickGoHome={this.props.onClickGoHome}/>
                 <AdicionarProduto />
             </div>
         )
