@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
-import Estrela from "./assets/iconfinder-icon (3).svg"
+import Estrela from "../assets/starIcon.svg"
 
 const ContainerCard = styled.section` // Container principal do card
     width: 800px;

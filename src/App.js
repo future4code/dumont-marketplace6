@@ -7,11 +7,14 @@ import {CardProdutoCarrinho} from './components/CardProdutoCarrinho'
 import {Home} from './components/Home'
 import {AgradecimentoCompra} from './components/AgradecimentoCompra'
 import {PaginaConsumidor} from './components/PaginaConsumidor'
+import {PaginaCarrinho} from './components/PaginaCarrinho'
+import {PaginaVendedor} from './components/PaginaVendedor'
+
 class App extends React.Component{
 	render(){
 		return (
 			
-		<PaginaConsumidor/>
+		<Home/>
 		)
 	}
 }
