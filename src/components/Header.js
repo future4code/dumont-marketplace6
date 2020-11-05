@@ -90,7 +90,7 @@ export class Header extends React.Component{
         return(
             <ContainerHeader>
                 <ContainerLogoBusca>
-                    <Logo src={LogoSimples}/>
+                    <Logo src={LogoSimples} onClick={this.props.onClickGoHome}/>
                     <ContainerInput>
                         <Input placeholder={'Pesquisa'}></Input>
                         <Search src={SearchIcon}/>
@@ -111,7 +111,7 @@ export class Header extends React.Component{
                     <ModeCommentRoundedIcon/>
                         </IconContainer>
                     <IconContainer>
-                        <ShoppingCartRoundedIcon/>
+                        <ShoppingCartRoundedIcon onClick={this.props.onClickGoCarrinho}/>
                     </IconContainer>
                     <IconContainer>
                         <GradeRoundedIcon/>

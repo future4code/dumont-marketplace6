@@ -62,7 +62,7 @@ class Cart extends React.Component {
                     <StyledHr/>
                     <StyledP><b>Total: R$ 200</b></StyledP>
                 </CartContainer>
-                <StyledButton>Continuar compra</StyledButton>
+                <StyledButton onClick={this.props.onClickEfetuaCompra}>Continuar compra</StyledButton>
             </MainContainer>
         )
     }

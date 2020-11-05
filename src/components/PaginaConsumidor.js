@@ -10,9 +10,16 @@ export class PaginaConsumidor extends React.Component{
     render(){
         return(
             <div>
-                <Header />
+                <Header 
+                onClick={this.props.onClickGoHome}
+                onClickGoHome={this.props.onClickGoHome}
+                onClickGoCarrinho={this.props.onClickGoCarrinho}/>
                 <Filtro />
                 <CardProduto/>
+                <CardProduto/>
+                <CardProduto/>
+                <CardProduto/>
+              
             </div>
         )
     }

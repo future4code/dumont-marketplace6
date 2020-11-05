@@ -10,8 +10,8 @@ export class PaginaCarrinho extends React.Component{
     render(){
         return(
             <div>
-                <Header />
-                <Cart/>
+                <Header onClickGoHome={this.props.onClickGoHome}/>
+                <Cart onClickEfetuaCompra={this.props.onClickEfetuaCompra}/>
             </div>
         )
     }
