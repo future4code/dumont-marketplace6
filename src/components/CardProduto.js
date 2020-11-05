@@ -122,7 +122,7 @@ export class CardProduto extends React.Component{
                     </Preco>                     
                     <ContainerBotao>
                     <h6>{produto.installments} vezes sem juros</h6>
-                        <ButtonCompra>Adicionar no carrinho</ButtonCompra>
+                        <ButtonCompra onClick={()=>this.props.adicionaProdutoCarrinho(produto)}>Adicionar no carrinho</ButtonCompra>
                     </ContainerBotao>
                     
                 </PagPay>   
