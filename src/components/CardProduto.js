@@ -110,9 +110,17 @@ const ButtonCompra = styled.button`
 
 export class CardProduto extends React.Component{
     
+    
+
+   
     render(){
-     
-        const renderProdutos = this.props.produtos.map((produto)=> {
+
+        const filtraEOrdena = this.props.produtos
+        .filter((produtos) => {return (produtos.price < this.props.filtroMax)})
+        .filter((produtos) => {return (produtos.price > this.props.filtroMin)})
+        .sort((a, b) => {return this.props.ordem === 'crescente' ? a.price - b.price : b.price - a.price})
+
+        const renderProdutos = filtraEOrdena.map((produto)=> {
             return(
             <ContainerCard>
                 <ImgProduto src={produto.photos}/>
@@ -134,6 +142,8 @@ export class CardProduto extends React.Component{
                 </PagPay>   
             </ContainerCard>  
         )})
+      
+
             return(
                 <div>
                     {renderProdutos}

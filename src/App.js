@@ -19,27 +19,29 @@ class App extends React.Component{
 		valorCarrinho:0,
 		quantidadeProdutos:0,
 		favoritos:[],
-		filtroMax:0,
-		filtroMin:0,
-		filtroNome:0,
-		ordem:'crescente'
+		filtroMax:1000,
+		filtroMin:"",
+		filtroNome:"",
+		ordem:'crescente',
+		filtrado:false,
 	}
 	
 	componentDidMount = () => {
         this.pegarProdutos()
 	};
 	
-	filtraProdutos = () => {
-		let novosProdutos = [... this.state.produtos]
-		
+	onClickFiltrado = () => {
+		this.setState({filtrado:true})
 	}
 
 	onChangeFiltroMax = (event) =>{
 		this.setState({filtroMax:event.target.value})
+		console.log(this.state.filtroMax)
 	}
 
 	onChangeFiltroMin = (event) =>{
 		this.setState({filtroMin:event.target.value})
+		console.log(this.state.filtroMin)
 	}
 
 	onChangeFiltroNome = (event) =>{
@@ -48,6 +50,8 @@ class App extends React.Component{
 	}
 	onChangeOrdem = (event) =>{
 		this.setState({ordem:event.target.value})
+		console.log(this.state.ordem)
+
 	}
 
     pegarProdutos = () => {
@@ -163,47 +167,55 @@ class App extends React.Component{
 			if (this.state.home === true){
 				return(
 					<Home
-					onClickGoPaginaConsumidor = {this.onClickGoPaginaConsumidor}
-					onClickGoPaginaVendedor = {this.onClickGoPaginaVendedor}/>
+						onClickGoPaginaConsumidor = {this.onClickGoPaginaConsumidor}
+						onClickGoPaginaVendedor = {this.onClickGoPaginaVendedor}/>
 				)
 			} else if(this.state.pConsumidor === true){
 				return(
 					<PaginaConsumidor
-					onClickGoHome={this.onClickGoHome}
-					onClickGoCarrinho={this.onClickGoCarrinho}
-					pegarProdutos={this.pegarProdutos}
-					produtos={this.state.produtos}
-					adicionaProdutoCarrinho={this.adicionaProdutoCarrinho}
-					favoritaProduto={this.favoritaProduto}
-					favoritos={this.state.favoritos}
-					onChangeFiltroMax={this.onChangeFiltroMax}
-					onChangeFiltroMin={this.onChangeFiltroMax}
-					onChangeFiltroNome={this.onChangeFiltroNome}
-					onChangeOrdem={this.onChangeOrdem}/>
+						onClickGoHome={this.onClickGoHome}
+						onClickGoCarrinho={this.onClickGoCarrinho}
+						pegarProdutos={this.pegarProdutos}
+						produtos={this.state.produtos}
+						adicionaProdutoCarrinho={this.adicionaProdutoCarrinho}
+						favoritaProduto={this.favoritaProduto}
+						favoritos={this.state.favoritos}
+						onChangeFiltroMax={this.onChangeFiltroMax}
+						onChangeFiltroMin={this.onChangeFiltroMin}
+						onChangeFiltroNome={this.onChangeFiltroNome}
+						onChangeOrdem={this.onChangeOrdem}
+						filtrarEOrdenar={this.filtrarEOrdenar}
+						filtroMin = {this.state.filtroMin}
+						filtroMax = {this.state.filtroMax}
+						ordem = {this.state.ordem}
+						filtrado={this.state.filtrado}
+						onClickFiltrado={this.onClickFiltrado}
+					/>
 				)
 			} else if(this.state.pVendedor === true){
 				return(
 					<PaginaVendedor
-					onClickGoHome={this.onClickGoHome}/>
+						onClickGoHome={this.onClickGoHome}/>
 				)
 			} else if(this.state.pCarrinho === true){
 				return(
 					<PaginaCarrinho 
-					onClickEfetuaCompra={this.onClickEfetuaCompra}
-					onClickGoHome={this.onClickGoHome}
-					carrinho={this.state.carrinho}
-					valorCarrinho={this.state.valorCarrinho}
-					aumentarQuantidadeProduto={this.aumentarQuantidadeProduto}
-					diminuirQuantidadeProduto={this.diminuirQuantidadeProduto}
-					removeProdutoCarrinho={this.removeProdutoCarrinho}
-					quantidadeProdutos = {this.state.quantidadeProdutos}
+						onClickEfetuaCompra={this.onClickEfetuaCompra}
+						onClickGoHome={this.onClickGoHome}
+						carrinho={this.state.carrinho}
+						valorCarrinho={this.state.valorCarrinho}
+						aumentarQuantidadeProduto={this.aumentarQuantidadeProduto}
+						diminuirQuantidadeProduto={this.diminuirQuantidadeProduto}
+						removeProdutoCarrinho={this.removeProdutoCarrinho}
+						quantidadeProdutos = {this.state.quantidadeProdutos}
+						
 					/>
 				)
 			} else if(this.state.pAgradecimento === true){
 				return(
 					<AgradecimentoCompra 
-					onClickGoPaginaConsumidor={this.onClickGoPaginaConsumidor}
-					onClickGoHome={this.onClickGoHome}/>
+						onClickGoPaginaConsumidor={this.onClickGoPaginaConsumidor}
+						onClickGoHome={this.onClickGoHome}/>
 				)
 			}
 		}
