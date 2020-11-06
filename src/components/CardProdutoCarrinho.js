@@ -11,7 +11,10 @@ const ContainerCard = styled.div`
     display:flex;
     align-items:center;
     border:1px solid black;
-    width:50%;`
+    width:50%;
+    background-color:white;
+    margin:auto;
+    margin-bottom:1vh;`
 
 const ImagemProduto = styled.img`
     height:20vh;
@@ -43,13 +46,15 @@ const ContainerQuantidade = styled.div`
     `
 
 const IconeMenos = styled.img`
-    height:2vh;`
+    height:2vh;
+    cursor:pointer;`
 
 const Quantidade = styled.p`
     `
 
 const IconeMais = styled.img`
-    height:3vh;`
+    height:3vh;
+    cursor:pointer;`
 
 const IconeEstrelaOutline = styled.img`
     align-self:flex-start;
@@ -63,62 +68,37 @@ const ContainerIcons = styled.div`
     align-items:flex-end;
     margin-left:2vw;`
  const IconTrashCan = styled.img`
-
+    cursor:pointer;
     height:4vh;
     width:2.5vw;`
 export class CardProdutoCarrinho extends React.Component{
-    state = {
-        favoritado: false
-    }
-    onClickFavorita = () => {
-        this.setState({favoritado:!this.state.favoritado})
-    }
+    
+    
     render(){
-        const renderizaNaTela = () => {
-            if(this.state.favoritado === false){
-                return(
-                    <ContainerCard>
-                        <ImagemProduto src={ImagemTeste}/>
-                        <ContainerElementosProduto>
-                            <NomeProduto>Adidas phosphere running - tênis para academia</NomeProduto>
-                            <CategoriaProduto>Calçados Masculinos</CategoriaProduto>
-                            <DescricaoProduto>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br/>Vivamus finibus ex sed fermentum iaculis.</DescricaoProduto>
-                        </ContainerElementosProduto>
-                        <ContainerQuantidade>
-                            <IconeMenos src={MinusIcon}/>
-                            <Quantidade>4</Quantidade>
-                            <IconeMais src={PlusIcon}/>
-                        </ContainerQuantidade>
-                        <ContainerIcons>
-                            <IconeEstrelaOutline src={starOutlineIcon}  onClick={this.onClickFavorita}/>
-                            <IconTrashCan src={trashCanIcon}/>
-                        </ContainerIcons>
-                    </ContainerCard>
-                )
-            } else {
-                return(
-                    <ContainerCard>
-                        <ImagemProduto src={ImagemTeste}/>
-                        <ContainerElementosProduto>
-                            <NomeProduto>Adidas phosphere running - tênis para academia</NomeProduto>
-                            <CategoriaProduto>Calçados Masculinos</CategoriaProduto>
-                            <DescricaoProduto>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br/>Vivamus finibus ex sed fermentum iaculis.</DescricaoProduto>
-                        </ContainerElementosProduto>
-                        <ContainerQuantidade>
-                            <IconeMenos src={MinusIcon}/>
-                            <Quantidade>4</Quantidade>
-                            <IconeMais src={PlusIcon}/>
-                        </ContainerQuantidade>
-                        <ContainerIcons>
-                            <IconeEstrelaOutline src={starFullIcon}  onClick={this.onClickFavorita}/>
-                            <IconTrashCan src={trashCanIcon}/>
-                        </ContainerIcons>
-                    </ContainerCard>
-                )
-            }
-        }
+        const renderCarrinho = this.props.carrinho.map((produto)=>{
+            return(
+            <ContainerCard>
+                <ImagemProduto src={produto.photos}/>
+                <ContainerElementosProduto>
+                    <NomeProduto>{produto.name}</NomeProduto>
+                    <CategoriaProduto>{produto.category}</CategoriaProduto>
+                    <DescricaoProduto>{produto.description}</DescricaoProduto>
+                </ContainerElementosProduto>
+                <ContainerQuantidade>
+                    <IconeMenos src={MinusIcon} onClick={()=>IconeMais>this.props.diminuirQuantidadeProduto(produto)}/>
+                    <Quantidade>{produto.quantidade}</Quantidade>
+                    <IconeMais src={PlusIcon} onClick={()=>IconeMais>this.props.aumentarQuantidadeProduto(produto)}/>
+                </ContainerQuantidade>
+                <ContainerIcons>
+                    <IconeEstrelaOutline src={starOutlineIcon}/>
+                    <IconTrashCan src={trashCanIcon} onClick={()=>this.props.removeProdutoCarrinho(produto)}/>
+                </ContainerIcons>
+            </ContainerCard>
+                    )
+                })
+           
         return (
-            <div>{renderizaNaTela()}</div>
+            <div>{renderCarrinho}</div>
         )
     }
 }

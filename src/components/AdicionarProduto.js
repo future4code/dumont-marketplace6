@@ -60,7 +60,7 @@ const Button = styled.button`
   }
 `;
 
-class CadProduto extends React.Component {
+class AdicionarProduto extends React.Component {
   render() {
     return (
       <div>
@@ -110,4 +110,4 @@ class CadProduto extends React.Component {
   }
 }
 
-export default CadProduto;
+export default AdicionarProduto;

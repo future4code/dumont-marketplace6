@@ -86,8 +86,8 @@ export class AgradecimentoCompra extends React.Component{
                 <FullLogo src={fullLogo}/>
                 <Recado>Sua compra de R$200 <br/>foi efetuada com sucesso!</Recado>
                 <ContainerBotoes>
-                    <BotaoComprarMais>COMPRAR MAIS PRODUTOS</BotaoComprarMais>
-                    <BotaoVoltarHome>VOLTAR HOME</BotaoVoltarHome>
+                    <BotaoComprarMais onClick={this.props.onClickGoPaginaConsumidor}>COMPRAR MAIS PRODUTOS</BotaoComprarMais>
+                    <BotaoVoltarHome onClick={this.props.onClickGoHome}>VOLTAR HOME</BotaoVoltarHome>
                 </ContainerBotoes>
             </ContainerHome>
         )

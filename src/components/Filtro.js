@@ -132,22 +132,26 @@ export class Filtro extends React.Component{
                         <StyledInputLabel id="ordenar-por-label">Ordenar por:</StyledInputLabel>
                         <StyledSelect
                             labelId="ordenar-por-label"
-                            id="odernar-por-select"
-                                
+                            id="odernar-por-select"  
+                            onChange = {this.props.onChangeOrdem}  
                         >
                             <MenuPlaceholder selected="selected" value="" disabled selected hidden>Selecione</MenuPlaceholder>
-                            <MenuItem>Nome</MenuItem>
-                            <MenuItem>Preço</MenuItem>
+                            <MenuItem>crescente</MenuItem>
+                            <MenuItem>decrescente</MenuItem>
                         </StyledSelect>
                     </ContainerDropdown>
                     <ContainerValorMinMax>
                         <ContainerValorMin>
                             <LabelForm>Valor Mínimo</LabelForm>
-                            <InputForm placeholder="De"></InputForm>
+                            <InputForm 
+                            placeholder="De" 
+                            onChange={this.props.onChangeFiltroMin}></InputForm>
                         </ContainerValorMin>
                         <ContainerValorMax>
                             <LabelForm>Valor Máximo</LabelForm>
-                            <InputForm placeholder="Até"></InputForm>
+                            <InputForm 
+                            placeholder="Até" 
+                            onChange={this.props.onChangeFiltroMax}></InputForm>
                         </ContainerValorMax>
                     </ContainerValorMinMax>
                     <ContainerCheckbox>
@@ -174,7 +178,7 @@ export class Filtro extends React.Component{
                         </ContainerLabelCheckbox>
                     </ContainerCheckbox>
                     <ContainerButton>
-                        <StyledButton>FILTRAR</StyledButton>
+                        <StyledButton onClick={this.props.onClickFiltrado}>FILTRAR</StyledButton>
                     </ContainerButton>
                 </FormFiltro>
             </ContainerFiltro>

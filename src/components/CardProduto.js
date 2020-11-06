@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 import Estrela from "../assets/starIcon.svg"
+import EstrelaCheia from "../assets/starIconFull.svg"
 
 const ContainerCard = styled.section` // Container principal do card
     width: 800px;
@@ -9,6 +10,7 @@ const ContainerCard = styled.section` // Container principal do card
     display: flex;
     margin-left: auto;
     margin-right: 32px;  
+    margin-top:5vh;
 
         div{
             
@@ -30,11 +32,13 @@ const ContainerCard = styled.section` // Container principal do card
             }
         }        
 `
+
 const PagPay = styled.div`
     display: flex;
     flex-direction: column;    
    
 `
+
 const Preco = styled.div`
     display: flex;
     flex-direction: row;
@@ -57,8 +61,10 @@ const Preco = styled.div`
         align-self: flex-end;
         margin-top: -100px;
         display: inline;
+        cursor:pointer;
     }
 `
+
 const ContainerBotao = styled.div`
     display: flex;
     flex-direction: column;
@@ -66,7 +72,6 @@ const ContainerBotao = styled.div`
     margin-top: 40px;
 
 `
-
 
 const ImgProduto = styled.img` // Imagem do produto
     height: 240px;
@@ -104,31 +109,46 @@ const ButtonCompra = styled.button`
     }`
 
 export class CardProduto extends React.Component{
+    
+    
+
+   
     render(){
-        return(
+
+        const filtraEOrdena = this.props.produtos
+        .filter((produtos) => {return (produtos.price < this.props.filtroMax)})
+        .filter((produtos) => {return (produtos.price > this.props.filtroMin)})
+        .sort((a, b) => {return this.props.ordem === 'crescente' ? a.price - b.price : b.price - a.price})
+
+        const renderProdutos = filtraEOrdena.map((produto)=> {
+            return(
             <ContainerCard>
-                <ImgProduto src="https://picsum.photos/id/0/163/240/"/>
+                <ImgProduto src={produto.photos}/>
                 <div>
-                    <h3>Nome do Produto</h3>
-                    <p>Informática</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing <br/> elit, sed do eiusmod tempor </p>
+                    <h3>{produto.name}</h3>
+                    <p>{produto.category}</p>
+                    <p>{produto.description}</p>
                 </div>
                 <PagPay>
                     <Preco>
-                        <h2>$30</h2>
-                        <img src={Estrela}/>
+                        <h2>R${produto.price}</h2>
+                        <img src={Estrela} onClick={()=>this.props.favoritaProduto(produto)}/>
                     </Preco>                     
                     <ContainerBotao>
-                    <h6>12 vezes sem juros</h6>
-                        <ButtonCompra>Adicionar no carrinho</ButtonCompra>
+                    <h6>{produto.installments} vezes sem juros</h6>
+                        <ButtonCompra onClick={()=>this.props.adicionaProdutoCarrinho(produto)}>Adicionar no carrinho</ButtonCompra>
                     </ContainerBotao>
                     
                 </PagPay>   
-                
-                                
-                            
-                
-            </ContainerCard>
-        )
+            </ContainerCard>  
+        )})
+      
+
+            return(
+                <div>
+                    {renderProdutos}
+                </div>
+            )
+        }
+       
     }
-}
