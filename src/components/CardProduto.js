@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components"
 import Estrela from "../assets/starIcon.svg"
+import EstrelaCheia from "../assets/starIconFull.svg"
 
 const ContainerCard = styled.section` // Container principal do card
     width: 800px;
@@ -60,6 +61,7 @@ const Preco = styled.div`
         align-self: flex-end;
         margin-top: -100px;
         display: inline;
+        cursor:pointer;
     }
 `
 
@@ -109,9 +111,10 @@ const ButtonCompra = styled.button`
 export class CardProduto extends React.Component{
     
     render(){
+     
         const renderProdutos = this.props.produtos.map((produto)=> {
             return(
-                <ContainerCard>
+            <ContainerCard>
                 <ImgProduto src={produto.photos}/>
                 <div>
                     <h3>{produto.name}</h3>
@@ -121,7 +124,7 @@ export class CardProduto extends React.Component{
                 <PagPay>
                     <Preco>
                         <h2>R${produto.price}</h2>
-                        <img src={Estrela}/>
+                        <img src={Estrela} onClick={()=>this.props.favoritaProduto(produto)}/>
                     </Preco>                     
                     <ContainerBotao>
                     <h6>{produto.installments} vezes sem juros</h6>
@@ -129,10 +132,6 @@ export class CardProduto extends React.Component{
                     </ContainerBotao>
                     
                 </PagPay>   
-                
-                                
-                            
-                
             </ContainerCard>  
         )})
             return(

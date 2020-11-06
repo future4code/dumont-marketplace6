@@ -17,6 +17,8 @@ class App extends React.Component{
         produtos:[],
 		carrinho:[],
 		valorCarrinho:0,
+		quantidadeProdutos:0,
+		favoritos:[]
 	}
 	
 	componentDidMount = () => {
@@ -30,6 +32,7 @@ class App extends React.Component{
 			let novosProdutos = [...this.state.produtos]
 			novosProdutos.map((produto)=>{
 				produto.quantidade = 0
+				produto.favoritado = false
 			})
 			this.setState({produtos:novosProdutos})
             console.log(resposta)
@@ -43,7 +46,7 @@ class App extends React.Component{
 		novoCarrinho.map((produtoCarrinho)=>{
 			if(produto.id === produtoCarrinho.id){
 				produto.quantidade += 1
-				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho})
+				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho, quantidadeProdutos: this.state.quantidadeProdutos + 1})
 			}
 		})
 		
@@ -54,15 +57,37 @@ class App extends React.Component{
 		novoCarrinho.map((produtoCarrinho)=>{
 			if(produto.id === produtoCarrinho.id){
 				produto.quantidade -=1
-				this.setState({valorCarrinho:this.state.valorCarrinho - produto.price})
+				this.setState({valorCarrinho:this.state.valorCarrinho - produto.price, quantidadeProdutos: this.state.quantidadeProdutos - 1})
+				if(produto.quantidade <= 0){
+					let i = novoCarrinho.indexOf(produtoCarrinho)
+					novoCarrinho.splice(i,1)
+					this.setState({carrinho:novoCarrinho})
+				}
 			}})
+		
 	}
+
+	removeProdutoCarrinho = (produto) => {
+		let novoCarrinho = [... this.state.carrinho]
+		novoCarrinho.map((produtoCarrinho)=>{
+			if(produto.id === produtoCarrinho.id){
+				let i = novoCarrinho.indexOf(produtoCarrinho)
+				novoCarrinho.splice(i,1)
+				this.setState({carrinho:novoCarrinho, 
+							quantidadeProdutos: this.state.quantidadeProdutos - produtoCarrinho.quantidade, 
+							valorCarrinho: this.state.valorCarrinho - (produtoCarrinho.quantidade * produtoCarrinho.price)})
+				produtoCarrinho.quantidade = 0
+				alert("REMOVIDO")
+			}
+		})
+	}
+	
     adicionaProdutoCarrinho = (produto) => {
 		let novoCarrinho = [... this.state.produtos]
 		novoCarrinho.map((produtoCarrinho)=>{
 			if(produto.id === produtoCarrinho.id){
 				produto.quantidade +=1
-				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho})
+				this.setState({valorCarrinho:produto.price + this.state.valorCarrinho, quantidadeProdutos: this.state.quantidadeProdutos + 1})
 			}})
 		let carrinhoFiltrado = novoCarrinho.filter(function(item){
 			return item.quantidade > 0
@@ -73,7 +98,21 @@ class App extends React.Component{
 		alert('Produto adicionado!')
 			
 		}
-        
+	
+	favoritaProduto = (produto) => {
+		let listaFavoritado = [...this.state.produtos]
+		listaFavoritado.map((item)=>{
+			if(produto.id === item.id && item.favoritado === false){
+				item.favoritado = true
+				alert("produto FAVORTIADO")
+			} 
+		})
+		let favoritosFiltrado = listaFavoritado.filter(function(e){
+			return e.favoritado === true
+		})
+		this.setState({favoritos:favoritosFiltrado})
+		console.log(this.state.favoritos)
+	}
     
 	
 	onClickGoPaginaConsumidor = () => {
@@ -108,7 +147,9 @@ class App extends React.Component{
 					onClickGoCarrinho={this.onClickGoCarrinho}
 					pegarProdutos={this.pegarProdutos}
 					produtos={this.state.produtos}
-					adicionaProdutoCarrinho={this.adicionaProdutoCarrinho}/>
+					adicionaProdutoCarrinho={this.adicionaProdutoCarrinho}
+					favoritaProduto={this.favoritaProduto}
+					favoritos={this.state.favoritos}/>
 				)
 			} else if(this.state.pVendedor === true){
 				return(
@@ -124,6 +165,8 @@ class App extends React.Component{
 					valorCarrinho={this.state.valorCarrinho}
 					aumentarQuantidadeProduto={this.aumentarQuantidadeProduto}
 					diminuirQuantidadeProduto={this.diminuirQuantidadeProduto}
+					removeProdutoCarrinho={this.removeProdutoCarrinho}
+					quantidadeProdutos = {this.state.quantidadeProdutos}
 					/>
 				)
 			} else if(this.state.pAgradecimento === true){

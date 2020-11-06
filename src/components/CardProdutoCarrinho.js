@@ -68,70 +68,37 @@ const ContainerIcons = styled.div`
     align-items:flex-end;
     margin-left:2vw;`
  const IconTrashCan = styled.img`
-
+    cursor:pointer;
     height:4vh;
     width:2.5vw;`
 export class CardProdutoCarrinho extends React.Component{
-    state = {
-        favoritado: false
-    }
-    onClickFavorita = () => {
-        this.setState({favoritado:!this.state.favoritado})
-    }
+    
     
     render(){
-        
-        const renderizaNaTela = () => {
-            if(this.state.favoritado === false){
-                const renderCarrinho = this.props.carrinho.map((produto)=>{
-                    return(
-                        <ContainerCard>
-                            <ImagemProduto src={produto.photos}/>
-                            <ContainerElementosProduto>
-                                <NomeProduto>{produto.name}</NomeProduto>
-                                <CategoriaProduto>{produto.category}</CategoriaProduto>
-                                <DescricaoProduto>{produto.description}</DescricaoProduto>
-                            </ContainerElementosProduto>
-                            <ContainerQuantidade>
-                                <IconeMenos src={MinusIcon} onClick={()=>IconeMais>this.props.diminuirQuantidadeProduto(produto)}/>
-                                <Quantidade>{produto.quantidade}</Quantidade>
-                                <IconeMais src={PlusIcon} onClick={()=>IconeMais>this.props.aumentarQuantidadeProduto(produto)}/>
-                            </ContainerQuantidade>
-                            <ContainerIcons>
-                                <IconeEstrelaOutline src={starOutlineIcon}  onClick={this.onClickFavorita}/>
-                                <IconTrashCan src={trashCanIcon}/>
-                            </ContainerIcons>
-                        </ContainerCard>
+        const renderCarrinho = this.props.carrinho.map((produto)=>{
+            return(
+            <ContainerCard>
+                <ImagemProduto src={produto.photos}/>
+                <ContainerElementosProduto>
+                    <NomeProduto>{produto.name}</NomeProduto>
+                    <CategoriaProduto>{produto.category}</CategoriaProduto>
+                    <DescricaoProduto>{produto.description}</DescricaoProduto>
+                </ContainerElementosProduto>
+                <ContainerQuantidade>
+                    <IconeMenos src={MinusIcon} onClick={()=>IconeMais>this.props.diminuirQuantidadeProduto(produto)}/>
+                    <Quantidade>{produto.quantidade}</Quantidade>
+                    <IconeMais src={PlusIcon} onClick={()=>IconeMais>this.props.aumentarQuantidadeProduto(produto)}/>
+                </ContainerQuantidade>
+                <ContainerIcons>
+                    <IconeEstrelaOutline src={starOutlineIcon}/>
+                    <IconTrashCan src={trashCanIcon} onClick={()=>this.props.removeProdutoCarrinho(produto)}/>
+                </ContainerIcons>
+            </ContainerCard>
                     )
                 })
-               return renderCarrinho
-            } else {
-                const renderCarrinho = this.props.carrinho.map((produto)=>{
-                    return(
-                        <ContainerCard>
-                            <ImagemProduto src={produto.photos}/>
-                            <ContainerElementosProduto>
-                                <NomeProduto>{produto.name}</NomeProduto>
-                                <CategoriaProduto>{produto.category}</CategoriaProduto>
-                                <DescricaoProduto>{produto.description}</DescricaoProduto>
-                            </ContainerElementosProduto>
-                            <ContainerQuantidade>
-                                <IconeMenos src={MinusIcon} onClick={()=>IconeMais>this.props.diminuirQuantidadeProduto(produto)}/>
-                                <Quantidade>{produto.quantidade}</Quantidade>
-                                <IconeMais src={PlusIcon} onClick={()=>IconeMais>this.props.aumentarQuantidadeProduto(produto)}/>
-                            </ContainerQuantidade>
-                            <ContainerIcons>
-                                <IconeEstrelaOutline src={starFullIcon}  onClick={this.onClickFavorita}/>
-                                <IconTrashCan src={trashCanIcon}/>
-                            </ContainerIcons>
-                        </ContainerCard>
-                    )
-                })  
-                return renderCarrinho
-            }
-        }
+           
         return (
-            <div>{renderizaNaTela()}</div>
+            <div>{renderCarrinho}</div>
         )
     }
 }

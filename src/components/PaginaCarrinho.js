@@ -16,7 +16,9 @@ export class PaginaCarrinho extends React.Component{
                 carrinho={this.props.carrinho}
                 valorCarrinho={this.props.valorCarrinho}
                 aumentarQuantidadeProduto={this.props.aumentarQuantidadeProduto}
-                diminuirQuantidadeProduto={this.props.diminuirQuantidadeProduto}/>
+                diminuirQuantidadeProduto={this.props.diminuirQuantidadeProduto}
+                removeProdutoCarrinho={this.props.removeProdutoCarrinho}
+                quantidadeProdutos = {this.props.quantidadeProdutos}/>
             </div>
         )
     }

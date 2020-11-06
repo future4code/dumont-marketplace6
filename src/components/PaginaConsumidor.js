@@ -20,7 +20,9 @@ export class PaginaConsumidor extends React.Component{
                 <CardProduto 
                     pegarProdutos={this.props.pegarProdutos}
                     produtos={this.props.produtos}
-                    adicionaProdutoCarrinho={this.props.adicionaProdutoCarrinho}/>
+                    adicionaProdutoCarrinho={this.props.adicionaProdutoCarrinho}
+                    favoritaProduto={this.props.favoritaProduto}
+                    favoritos={this.props.favoritos}/>
             </div>
         )
     }
