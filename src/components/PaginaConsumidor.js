@@ -16,7 +16,11 @@ export class PaginaConsumidor extends React.Component{
                     onClick={this.props.onClickGoHome}
                     onClickGoHome={this.props.onClickGoHome}
                     onClickGoCarrinho={this.props.onClickGoCarrinho}/>
-                <Filtro/>
+                <Filtro
+                    onChangeFiltroMax={this.props.onChangeFiltroMax}
+					onChangeFiltroMin={this.props.onChangeFiltroMax}
+					onChangeFiltroNome={this.props.onChangeFiltroNome}
+					onChangeOrdem={this.props.onChangeOrdem}/>
                 <CardProduto 
                     pegarProdutos={this.props.pegarProdutos}
                     produtos={this.props.produtos}

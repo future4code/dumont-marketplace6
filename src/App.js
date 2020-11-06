@@ -18,13 +18,38 @@ class App extends React.Component{
 		carrinho:[],
 		valorCarrinho:0,
 		quantidadeProdutos:0,
-		favoritos:[]
+		favoritos:[],
+		filtroMax:0,
+		filtroMin:0,
+		filtroNome:0,
+		ordem:'crescente'
 	}
 	
 	componentDidMount = () => {
         this.pegarProdutos()
 	};
 	
+	filtraProdutos = () => {
+		let novosProdutos = [... this.state.produtos]
+		
+	}
+
+	onChangeFiltroMax = (event) =>{
+		this.setState({filtroMax:event.target.value})
+	}
+
+	onChangeFiltroMin = (event) =>{
+		this.setState({filtroMin:event.target.value})
+	}
+
+	onChangeFiltroNome = (event) =>{
+		this.
+		setState({filtroNome:event.target.value})
+	}
+	onChangeOrdem = (event) =>{
+		this.setState({ordem:event.target.value})
+	}
+
     pegarProdutos = () => {
         axios.get("https://us-central1-labenu-apis.cloudfunctions.net/fourUsedOne/products")
         .then((resposta)=>{
@@ -94,10 +119,9 @@ class App extends React.Component{
 		})
 				
 		this.setState({carrinho:carrinhoFiltrado})
-		console.log(this.state.carrinho)
 		alert('Produto adicionado!')
 			
-		}
+	}
 	
 	favoritaProduto = (produto) => {
 		let listaFavoritado = [...this.state.produtos]
@@ -114,7 +138,6 @@ class App extends React.Component{
 		console.log(this.state.favoritos)
 	}
     
-	
 	onClickGoPaginaConsumidor = () => {
 		this.setState({pConsumidor:true, home:false, pAgradecimento:false})
 	}
@@ -122,9 +145,11 @@ class App extends React.Component{
 	onClickGoPaginaVendedor = () => {
 		this.setState({pVendedor:true, home:false})
 	}
+
 	onClickGoHome = () => {
 		this.setState({home:true, pConsumidor:false, pVendedor:false, pCarrinho:false, pAgradecimento:false})
 	}
+
 	onClickGoCarrinho = () => {
 		this.setState({pCarrinho:true, pConsumidor:false})
 	}
@@ -132,6 +157,7 @@ class App extends React.Component{
 	onClickEfetuaCompra = () => {
 		this.setState({pCarrinho:false, pAgradecimento:true})
 	}
+
 	render(){
 		const renderizaPagina = () => {
 			if (this.state.home === true){
@@ -149,7 +175,11 @@ class App extends React.Component{
 					produtos={this.state.produtos}
 					adicionaProdutoCarrinho={this.adicionaProdutoCarrinho}
 					favoritaProduto={this.favoritaProduto}
-					favoritos={this.state.favoritos}/>
+					favoritos={this.state.favoritos}
+					onChangeFiltroMax={this.onChangeFiltroMax}
+					onChangeFiltroMin={this.onChangeFiltroMax}
+					onChangeFiltroNome={this.onChangeFiltroNome}
+					onChangeOrdem={this.onChangeOrdem}/>
 				)
 			} else if(this.state.pVendedor === true){
 				return(
